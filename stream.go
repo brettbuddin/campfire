@@ -54,3 +54,8 @@ func (s *Stream) Connect() {
         }
     }
 }
+
+// Disconnect stops the stream
+func (s *Stream) Disconnect() {
+    s.base.Disconnect()
+}
