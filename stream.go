@@ -14,6 +14,7 @@ type Stream struct {
     messages chan *Message
 }
 
+// NewStream returns a Stream
 func NewStream(room *Room, messages chan *Message) *Stream {
     return &Stream{
         room: room,
@@ -21,7 +22,8 @@ func NewStream(room *Room, messages chan *Message) *Stream {
     }
 }
 
-func (s *Stream) Start() {
+// Connect starts the stream
+func (s *Stream) Connect() {
     url := &url.URL{
         Scheme: "https",
         Host: "streaming.campfirenow.com",

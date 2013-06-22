@@ -1,5 +1,7 @@
 package campfire
 
+// Sound Effects
+
 const (
     BUELLER       = "bueller"
     CRICKETS      = "crickets"
@@ -13,7 +15,7 @@ const (
     LIVE          = "live"
     LOGGINS       = "loggins"
     MODEM         = "56k"
-    NOOOO         = "noooo"
+    NO            = "noooo"
     NYAN          = "nyan"
     OHMY          = "ohmy"
     OHYEAH        = "ohyeah"

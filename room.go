@@ -27,38 +27,47 @@ type RoomsResult struct {
     Rooms []*Room `json:"rooms"`
 }
 
+// Stream returns a Stream for you to follow the contents of the Room
 func (r *Room) Stream(messages chan *Message) *Stream {
     return NewStream(r, messages)
 }
 
+// Join joins the Room
 func (r *Room) Join() error {
     return r.conn.Post(fmt.Sprintf("/room/%d/join", r.Id), nil)
 }
 
+// Leave leaves the Room
 func (r *Room) Leave() error {
     return r.conn.Post(fmt.Sprintf("/room/%d/leave", r.Id), nil)
 }
 
+// Lock locks the Room
 func (r *Room) Lock() error {
     return r.conn.Post(fmt.Sprintf("/room/%d/lock", r.Id), nil)
 }
 
+// Unlock unlocks the Room
 func (r *Room) Unlock() error {
     return r.conn.Post(fmt.Sprintf("/room/%d/unlock", r.Id), nil)
 }
 
+// SendText sends a TextMessage to the Room
 func (r *Room) SendText(message string) error {
     return r.message("TextMessage", message)
 }
 
+// SendPaste sends a PasteMessage to the Room
 func (r *Room) SendPaste(content string) error {
     return r.message("PasteMessage", content)
 }
 
+// SendSound sends a SoundMessage to the Room
 func (r *Room) SendSound(name string) error {
     return r.message("SoundMessage", name)
 }
 
+// SendTweet sends a TweetMessage to the Room
 func (r *Room) SendTweet(url string) error {
     return r.message("TweetMessage", url)
 }

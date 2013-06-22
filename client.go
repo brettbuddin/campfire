@@ -4,6 +4,7 @@ import (
     "fmt"
 )
 
+// NewCLient returns a Client
 func NewClient(subdomain, token string) *Client {
     return &Client{
         conn: NewConnection(subdomain, token),
@@ -17,6 +18,7 @@ type Client struct {
     subdomain, token string
 }
 
+// Account returns the Account related to the token
 func (c *Client) Account() (*Account, error) {
     var result AccountResult
     err := c.conn.Get("/account.json", &result)
@@ -29,6 +31,7 @@ func (c *Client) Account() (*Account, error) {
     return result.Account, nil
 }
 
+// Me returns a User that represents You
 func (c *Client) Me() (*User, error) {
     var result UserResult
     err := c.conn.Get("/users/me.json", &result)
@@ -41,6 +44,7 @@ func (c *Client) Me() (*User, error) {
     return result.User, nil
 }
 
+// UserForId returns a User that has the specific ID
 func (c *Client) UserForId(id int) (*User, error) {
     var result UserResult
     err := c.conn.Get(fmt.Sprintf("/users/%d.json", id), &result)
@@ -53,6 +57,7 @@ func (c *Client) UserForId(id int) (*User, error) {
     return result.User, nil
 }
 
+// RoomForId returns a Room that has the specific ID
 func (c *Client) RoomForId(id int) (*Room, error) {
     var result RoomResult
     err := c.conn.Get(fmt.Sprintf("/room/%d.json", id), &result)
@@ -65,6 +70,7 @@ func (c *Client) RoomForId(id int) (*Room, error) {
     return result.Room, nil
 }
 
+// Rooms returns all Rooms listed on the Account
 func (c *Client) Rooms() ([]*Room, error) {
     var result RoomsResult
     err := c.conn.Get("/rooms.json", &result)

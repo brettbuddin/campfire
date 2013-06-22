@@ -27,6 +27,7 @@ func (c *Connection) url(path string) *url.URL {
     }
 }
 
+// Get sends a GET request and loads the result into a value
 func (c *Connection) Get(path string, value interface{}) error {
     endpoint  := httpie.Get{c.url(path)}
     resp, err := c.client.Request(endpoint)
@@ -39,6 +40,7 @@ func (c *Connection) Get(path string, value interface{}) error {
     return json.NewDecoder(resp.Body).Decode(value)
 }
 
+// Post sends a POST request and loads the result into a value
 func (c *Connection) Post(path string, value interface{}) error {
     body, err := json.Marshal(value)
     if err != nil {
@@ -56,6 +58,7 @@ func (c *Connection) Post(path string, value interface{}) error {
     return nil
 }
 
+// Put sends a PUT request and loads the result into a value
 func (c *Connection) Put(path string, value interface{}) error {
     body, err := json.Marshal(value)
     if err != nil {
@@ -73,6 +76,7 @@ func (c *Connection) Put(path string, value interface{}) error {
     return nil
 }
 
+// Delete sends a DELETE request and loads the result into a value
 func (c *Connection) Delete(path string) error {
     endpoint  := httpie.Delete{c.url(path)}
     resp, err := c.client.Request(endpoint)
