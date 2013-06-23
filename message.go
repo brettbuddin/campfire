@@ -29,8 +29,3 @@ func (m *Message) Star() error {
 func (m *Message) Unstar() error {
     return m.conn.Delete(fmt.Sprintf("/messages/%d/unstar", m.Id))
 }
-
-// Connection returns the connection bound to this message
-func (m *Message) Connection() *Connection {
-    return m.conn
-}
