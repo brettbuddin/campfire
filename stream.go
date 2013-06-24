@@ -5,7 +5,6 @@ import (
     "net/url"
     "fmt"
     "encoding/json"
-    "log"
 )
 
 type Stream struct {
@@ -38,7 +37,6 @@ func (s *Stream) Connect() {
 
     go s.base.Connect()
 
-    log.Println("Streaming")
     for {
         select {
         case data := <-s.base.Data():
