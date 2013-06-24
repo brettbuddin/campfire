@@ -73,7 +73,7 @@ func (r *Room) SendTweet(url string) error {
 }
 
 func (r *Room) message(typ, body string) error {
-    var result MessageResult;
+    result := MessageResult{&Message{}}
     result.Message.Body = strings.Replace(body, "\n", "&#xA;", -1)
     result.Message.Type = typ
     return r.conn.Post(fmt.Sprintf("/room/%d/speak", r.Id), result)
