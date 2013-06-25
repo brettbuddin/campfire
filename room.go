@@ -54,27 +54,26 @@ func (r *Room) Unlock() error {
 
 // SendText sends a TextMessage to the Room
 func (r *Room) SendText(message string) error {
-    return r.message("TextMessage", message)
+    message = strings.Replace(message, "\n", "&#xA;", -1)
+    return r.message(&Message{Type:"TextMessage", Body: message})
 }
 
 // SendPaste sends a PasteMessage to the Room
 func (r *Room) SendPaste(content string) error {
-    return r.message("PasteMessage", content)
+    return r.message(&Message{Type:"PasteMessage", Body: content})
 }
 
 // SendSound sends a SoundMessage to the Room
 func (r *Room) SendSound(name string) error {
-    return r.message("SoundMessage", name)
+    return r.message(&Message{Type:"SoundMessage", Body: name})
 }
 
 // SendTweet sends a TweetMessage to the Room
 func (r *Room) SendTweet(url string) error {
-    return r.message("TweetMessage", url)
+    return r.message(&Message{Type:"TweetMessage", Body: url})
 }
 
-func (r *Room) message(typ, body string) error {
-    result := MessageResult{&Message{}}
-    result.Message.Body = strings.Replace(body, "\n", "&#xA;", -1)
-    result.Message.Type = typ
+func (r *Room) message(m *Message) error {
+    result := MessageResult{m}
     return r.conn.Post(fmt.Sprintf("/room/%d/speak", r.Id), result)
 }
