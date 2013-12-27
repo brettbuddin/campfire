@@ -28,8 +28,8 @@ type RoomsResult struct {
 }
 
 // Stream returns a Stream for you to follow the contents of the Room
-func (r *Room) Stream(messages chan *Message) *Stream {
-    return NewStream(r, messages)
+func (r *Room) Stream() *Stream {
+    return NewStream(r)
 }
 
 // Join joins the Room

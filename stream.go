@@ -10,15 +10,15 @@ import (
 type Stream struct {
     base     *httpie.Stream
     room     *Room
-    messages chan *Message
+    outgoing chan *Message
     stop     chan bool
 }
 
 // NewStream returns a Stream
-func NewStream(room *Room, messages chan *Message) *Stream {
+func NewStream(room *Room) *Stream {
     return &Stream{
         room: room,
-        messages: messages,
+        outgoing: make(chan *Message),
         stop: make(chan bool),
     }
 }
@@ -42,6 +42,7 @@ func (s *Stream) Connect() {
     for {
         select {
         case <-s.stop:
+            close(s.outgoing)
             return
         case data := <-s.base.Data():
             var m Message
@@ -52,9 +53,13 @@ func (s *Stream) Connect() {
             }
 
             m.conn = s.room.conn
-            s.messages <- &m
+            s.outgoing <- &m
         }
     }
+}
+
+func (s *Stream) Messages() chan *Message {
+    return s.outgoing
 }
 
 // Disconnect stops the stream
