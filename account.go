@@ -3,10 +3,10 @@ package campfire
 type Account struct {
     conn *Connection
 
-    Id          int    `json:"id"`
+    ID          int    `json:"id"`
     Name        string `json:"name"`
     Subdomain   string `json:"subdomain"`
-    OwnerId     int    `json:"owner_id"`
+    OwnerID     int    `json:"owner_id"`
     Plan        string `json:"plan"`
     StorageUsed int    `json:"storage"`
     Timezone    string `json:"time_zone"`

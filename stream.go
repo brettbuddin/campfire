@@ -28,7 +28,7 @@ func (s *Stream) Connect() {
     url := &url.URL{
         Scheme: "https",
         Host: "streaming.campfirenow.com",
-        Path: fmt.Sprintf("/room/%d/live.json", s.room.Id),
+        Path: fmt.Sprintf("/room/%d/live.json", s.room.ID),
     }
 
     s.base = httpie.NewStream(

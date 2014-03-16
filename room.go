@@ -8,7 +8,7 @@ import (
 type Room struct {
     conn *Connection
 
-    Id               int      `json:"id,omitempty"`
+    ID               int      `json:"id,omitempty"`
     Full             bool     `json:"full,omitempty"`
     MembershipLimit  int      `json:"membership_limit,omitempty"`
     Name             string   `json:"name,omitempty"`
@@ -34,22 +34,22 @@ func (r *Room) Stream() *Stream {
 
 // Join joins the Room
 func (r *Room) Join() error {
-    return r.conn.Post(fmt.Sprintf("/room/%d/join", r.Id), nil)
+    return r.conn.Post(fmt.Sprintf("/room/%d/join", r.ID), nil)
 }
 
 // Leave leaves the Room
 func (r *Room) Leave() error {
-    return r.conn.Post(fmt.Sprintf("/room/%d/leave", r.Id), nil)
+    return r.conn.Post(fmt.Sprintf("/room/%d/leave", r.ID), nil)
 }
 
 // Lock locks the Room
 func (r *Room) Lock() error {
-    return r.conn.Post(fmt.Sprintf("/room/%d/lock", r.Id), nil)
+    return r.conn.Post(fmt.Sprintf("/room/%d/lock", r.ID), nil)
 }
 
 // Unlock unlocks the Room
 func (r *Room) Unlock() error {
-    return r.conn.Post(fmt.Sprintf("/room/%d/unlock", r.Id), nil)
+    return r.conn.Post(fmt.Sprintf("/room/%d/unlock", r.ID), nil)
 }
 
 // SendText sends a TextMessage to the Room
@@ -75,5 +75,5 @@ func (r *Room) SendTweet(url string) error {
 
 func (r *Room) message(m *Message) error {
     result := MessageResult{m}
-    return r.conn.Post(fmt.Sprintf("/room/%d/speak", r.Id), result)
+    return r.conn.Post(fmt.Sprintf("/room/%d/speak", r.ID), result)
 }

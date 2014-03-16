@@ -44,8 +44,8 @@ func (c *Client) Me() (*User, error) {
     return result.User, nil
 }
 
-// UserForId returns a User that has the specific ID
-func (c *Client) UserForId(id int) (*User, error) {
+// UserForID returns a User that has the specific ID
+func (c *Client) UserForID(id int) (*User, error) {
     var result UserResult
     err := c.conn.Get(fmt.Sprintf("/users/%d.json", id), &result)
 
@@ -57,8 +57,8 @@ func (c *Client) UserForId(id int) (*User, error) {
     return result.User, nil
 }
 
-// RoomForId returns a Room that has the specific ID
-func (c *Client) RoomForId(id int) (*Room, error) {
+// RoomForID returns a Room that has the specific ID
+func (c *Client) RoomForID(id int) (*Room, error) {
     var result RoomResult
     err := c.conn.Get(fmt.Sprintf("/room/%d.json", id), &result)
 
